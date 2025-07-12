@@ -1,0 +1,642 @@
+/* =================================
+   1. FONDASI & VARIABEL GLOBAL
+   ================================= */
+
+/* CSS Reset Sederhana */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Mendefinisikan Variabel Global (Custom Properties) */
+:root {
+    /* Palet Warna: Hangat, Elegan, Minimalis */
+    --color-background: #F8F5F2; /* Warna latar belakang (putih gading/off-white) */
+    --color-text-primary: #333333;   /* Warna teks utama (abu-abu gelap) */
+    --color-text-secondary: #666666;/* Warna teks sekunder */
+    --color-accent: #B08968;       /* Warna aksen (coklat kayu hangat) */
+    --color-white: #FFFFFF;
+
+    /* Tipografi */
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+/* Gaya Dasar untuk Seluruh Halaman */
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+}
+
+/* Kelas (Class) Bantuan yang akan sering kita gunakan */
+.container {
+    width: 90%;
+    max-width: 1100px; /* Lebar maksimal konten agar tidak terlalu lebar di layar besar */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* =================================
+   2. HEADER & NAVIGASI
+   ================================= */
+.main-header {
+    padding: 1.5rem 0;
+    position: absolute; /* Membuat header "mengambang" di atas hero section */
+    width: 100%;
+    z-index: 10; /* Memastikan header selalu di lapisan paling atas */
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between; /* Mendorong logo ke kiri dan nav ke kanan */
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-white); /* Warna logo putih agar kontras dengan hero image */
+}
+
+.main-nav ul {
+    list-style: none; /* Menghilangkan bulatan/angka pada list */
+    display: flex;
+    gap: 2rem; /* Memberi jarak antar link navigasi */
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--color-white);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.3s ease; /* Transisi halus saat hover */
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--color-accent); /* Mengubah warna saat di-hover atau aktif */
+}
+
+/* Tombol hamburger kita sembunyikan dulu di desktop */
+.nav-toggle {
+    display: none;
+}
+
+
+/* =================================
+   3. HERO SECTION
+   ================================= */
+.hero {
+    min-height: 100vh; /* Tinggi minimal setinggi layar viewport */
+    background-image: 
+        /* Lapisan Gradien Gelap untuk Readability */
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        /* Gambar Latar Belakang Anda */
+        url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2070'); /* GANTI DENGAN URL GAMBAR ANDA */
+    
+    background-size: cover; /* Memastikan gambar menutupi seluruh area */
+    background-position: center; /* Posisi gambar di tengah */
+    
+    /* Menengahkan konten di dalamnya (headline) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem; /* Ukuran bisa disesuaikan */
+    font-weight: 700;
+    color: var(--color-white);
+    max-width: 800px;
+    line-height: 1.2;
+}
+/* =================================
+   4. INTRO SECTION
+   ================================= */
+.intro {
+    padding: 5rem 0; /* Memberi jarak vertikal yang lega */
+    text-align: center;
+}
+
+.intro p {
+    font-family: var(--font-heading); /* Menggunakan font judul untuk kesan puitis */
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    max-width: 750px; /* Membatasi lebar teks agar mudah dibaca */
+    margin: 0 auto; /* Menengahkan paragraf yang lebarnya sudah dibatasi */
+}
+
+/* =================================
+   5. MENU HIGHLIGHT SECTION
+   ================================= */
+.menu-highlight {
+    padding: 5rem 0;
+    background-color: var(--color-white); /* Memberi sedikit perbedaan warna latar */
+    text-align: center;
+}
+
+.menu-highlight h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    margin-bottom: 3rem; /* Jarak antara judul bagian dan grid */
+    color: var(--color-text-primary);
+}
+
+.highlight-grid {
+    display: grid;
+    /* Membuat 3 kolom yang sama lebarnya. Di layar kecil, ini akan kita ubah. */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2.5rem; /* Jarak antar item di dalam grid */
+    margin-bottom: 3.5rem; /* Jarak antara grid dan tombol */
+}
+
+.highlight-item {
+    text-align: center;
+}
+
+.highlight-item img {
+    width: 100%;
+    height: 400px; /* Memberi tinggi yang sama untuk semua gambar */
+    object-fit: cover; /* Penting! Mencegah gambar penyok/terdistorsi */
+    margin-bottom: 1.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 15px;
+}
+
+.highlight-item img:hover {
+    transform: scale(1.03); /* Sedikit membesar saat disentuh mouse */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Memberi bayangan lembut */
+}
+
+.highlight-item h3 {
+    font-family: var(--font-body);
+    font-size: 1.3rem;
+    font-weight: 750;
+    color: var(--color-text-primary);
+}
+
+/* Tombol Aksi (Call to Action Button) */
+.btn {
+    display: inline-block; /* Agar bisa diberi padding */
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    padding: 0.8rem 2.5rem;
+    border-radius: 4px; /* Sudut yang sedikit melengkung */
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #9a724f; /* Warna aksen yang sedikit lebih gelap */
+}
+/* =================================
+   6. ATMOSPHERE GALLERY SECTION
+   ================================= */
+.atmosphere-gallery {
+    padding: 5rem 0;
+}
+
+.atmosphere-gallery h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.gallery-grid {
+    display: grid;
+    gap: 1rem;
+    /* Kita akan membuat layout grid yang lebih dinamis */
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom dasar */
+    grid-auto-rows: 250px; /* Tinggi baris otomatis */
+    
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+     border-radius: 10px;
+}
+
+.gallery-grid img:hover {
+    filter: brightness(0.8) sepia(0.2); /* Efek redup dan sedikit hangat saat hover */
+}
+
+/* Membuat beberapa gambar menempati lebih dari 1 kolom/baris untuk efek Masonry */
+.gallery-grid img:nth-child(1) {
+    grid-column: span 2; /* Gambar pertama memanjang 2 kolom */
+    grid-row: span 2;    /* dan memanjang 2 baris */
+}
+
+.gallery-grid img:nth-child(2) {
+    grid-column: span 2; /* Gambar kedua memanjang 2 kolom */
+}
+
+
+/* =================================
+   7. FOOTER SECTION
+   ================================= */
+.main-footer {
+    background-color: var(--color-text-primary);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 4rem 0 2rem 0;
+    margin-top: 5rem; /* Memberi jarak dari galeri */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    flex-wrap: wrap; /* Agar rapi di layar kecil nanti */
+    gap: 2rem;
+}
+
+.footer-info h3 {
+    font-family: var(--font-heading);
+    color: var(--color-white);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-social a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--color-accent);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+/* =================================
+   8. DESAIN RESPONSIF (MEDIA QUERIES)
+   ================================= */
+
+/* A. Untuk Layar Tablet (lebar maksimal 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        width: 90%; /* Sedikit memperlebar kontainer */
+    }
+
+    .hero h1 {
+        font-size: 3.5rem; /* Sedikit mengecilkan judul utama */
+    }
+
+    .highlight-grid {
+        grid-template-columns: repeat(2, 1fr); /* Ubah dari 3 kolom menjadi 2 kolom */
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* Ubah galeri menjadi 2 kolom */
+    }
+
+    /* Mengatur ulang layout galeri agar tidak aneh */
+    .gallery-grid img:nth-child(1),
+    .gallery-grid img:nth-child(2) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
+
+/* =================================
+   HALAMAN INTERNAL (TENTANG, MENU, DLL)
+   ================================= */
+
+.page-header {
+    background-color: var(--color-white);
+    text-align: center;
+    padding: 8rem 0 4rem 0;
+}
+
+.page-header h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--color-text-primary);
+}
+
+.about-section {
+    padding: 5rem 0;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Kolom teks sedikit lebih lebar */
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* CSS untuk Halaman Menu */
+.menu-intro {
+    text-align: center;
+    padding: 3rem 0;
+}
+.menu-intro p {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.menu-list {
+    padding-bottom: 5rem;
+}
+
+.menu-category {
+    margin-bottom: 4rem;
+}
+
+.menu-category h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2.5rem; /* Jarak baris dan kolom */
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.menu-item h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-text-primary);
+}
+
+.price {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-accent);
+}
+
+.description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+/* CSS untuk Halaman Kontak */
+.contact-section {
+    padding: 5rem 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-info h2, .contact-form h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-info ul {
+    list-style: none;
+    line-height: 2;
+    margin: 1.5rem 0;
+}
+
+.map-container {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: var(--font-body);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.contact-form .btn {
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Menyesuaikan ukuran ikon sosial */
+.footer-social a i {
+    font-size: 1.6rem; /* Ubah angka ini sesuai selera */
+    transition: color 0.3s ease; /* Transisi ini sudah ada dari .footer-social a */
+}
+
+
+/* B. Untuk Layar Ponsel (lebar maksimal 768px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px; /* Menyesuaikan ukuran font dasar untuk keterbacaan */
+    }
+
+    /* --- Navigasi Mobile (Hamburger Menu) --- */
+    .main-nav {
+        /* Sembunyikan navigasi desktop */
+        display: none; 
+        
+        /* Ubah menjadi menu vertikal yang muncul dari atas */
+        position: absolute;
+        top: 100%; /* Mulai tepat di bawah header */
+        left: 0;
+        width: 100%;
+        background-color: var(--color-text-primary);
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+
+    .main-nav.active {
+        display: flex; /* Tampilkan menu jika memiliki kelas 'active' */
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Susun link secara vertikal */
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav li {
+        padding: 1rem 0;
+    }
+
+    /* Tampilkan tombol hamburger */
+    .nav-toggle {
+        display: block; /* Menampilkan tombol hamburger */
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .hamburger {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: var(--color-white);
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: var(--color-white);
+        left: 0;
+        transition: transform 0.3s ease, top 0.3s ease;
+    }
+
+    .hamburger::before { top: -8px; }
+    .hamburger::after { top: 8px; }
+    /* --- Akhir Navigasi Mobile --- */
+
+
+    .hero {
+        min-height: 80vh; /* Sedikit mengurangi tinggi hero di mobile */
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .intro p {
+        font-size: 1.5rem;
+    }
+
+    .highlight-grid {
+        grid-template-columns: 1fr; /* Ubah menjadi 1 kolom */
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Ubah galeri menjadi 1 kolom juga */
+    }
+
+    .footer-content {
+        flex-direction: column; /* Susun konten footer secara vertikal */
+        text-align: center;
+    }
+
+    .footer-social {
+        margin-top: 2rem;
+    }
+
+    .footer-social a {
+        margin: 0 1rem;
+    }
+}
+/* Responsif untuk Halaman Tentang */
+.about-grid {
+    grid-template-columns: 1fr; /* Ubah jadi 1 kolom di mobile */
+}
+
+.about-text {
+    order: 2; /* Pindahkan teks ke bawah gambar di mobile */
+}
+
+.about-image {
+    order: 1;
+}
+
+.page-header {
+    padding: 6rem 0 3rem 0;
+}
+
+.page-header h1 {
+    font-size: 2.8rem;
+}
+/* Responsif untuk Halaman Menu */
+.menu-grid {
+    grid-template-columns: 1fr; /* Ubah jadi 1 kolom di mobile */
+}
+/* Responsif untuk Halaman Kontak */
+.contact-grid {
+    grid-template-columns: 1fr;
+}
